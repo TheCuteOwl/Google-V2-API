@@ -17,7 +17,6 @@ Python (version 3.x)
 ### Installation
 
 ```bash
-# Example installation steps
 git clone https://github.com/TheCuteOwl/Google-V2-API.git
 cd Google-V2-API-main
 pip install -r requirements.txt
