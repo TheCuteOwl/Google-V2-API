@@ -15,6 +15,8 @@ def make_api_request(query):
 
     try:
         response = requests.post(url, json=data, headers=headers)
+        response.raise_for_status()  # Raise an HTTPError for bad responses
+
         response_data = response.json()
 
         for result in response_data:
@@ -23,14 +25,14 @@ def make_api_request(query):
             time = result[1][0]
 
             listing.append(f"URL: {url}\nName: {name}\nTime: {time}\n{'-' * 30}")
-    
+
     except requests.exceptions.RequestException as e:
         print(f"Error making API request: {e}")
         return 'ERROR'
     
     return '\n'.join(listing)
 
-if __name__ == "__main__":
+def main():
     user_query = input("Enter your query: ")
 
     req = make_api_request(user_query)
@@ -38,3 +40,6 @@ if __name__ == "__main__":
 
     with open('data.txt', 'w+', encoding='utf-8') as f:
         f.write(req)
+
+if __name__ == "__main__":
+    main()
